@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片图库</title>
+    <style>
+        img {
+            width: 150px; /* 控制图片大小 */
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>我的图片图库</h1>
+    <div id="gallery"></div> <!-- 图片容器 -->
+    <script>
+        // 这里插入前端JS代码
+        fetch('https://tuchuang.spzyx.eu.org/list')
+            .then(res => res.json())
+            .then(fileList => {
+                const gallery = document.getElementById('gallery');
+                fileList.forEach(file => {
+                    const img = document.createElement('img');
+                    img.src = `https://tuchuang.spzyx.eu.org/images/${file.name}`; // 生成图片URL
+                    gallery.appendChild(img);
+                });
+            })
+            .catch(err => console.error('获取图片列表失败:', err));
+    </script>
+</body>
+</html>
